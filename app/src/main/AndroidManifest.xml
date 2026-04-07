@@ -19,6 +19,10 @@
         android:label="@string/permission_run_command_label"
         android:protectionLevel="dangerous" />
 
+    <!-- ==================== SHIZUKU PERMISO ==================== -->
+    <uses-permission android:name="moe.shizuku.manager.permission.MANAGE" />
+    <!-- ======================================================== -->
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -175,6 +179,15 @@
             android:grantUriPermissions="true"
             android:permission="${TERMUX_PACKAGE_NAME}.permission.RUN_COMMAND" />
 
+        <!-- ==================== SHIZUKU PROVIDER ==================== -->
+        <provider
+            android:name="rikka.shizuku.ShizukuProvider"
+            android:authorities="${applicationId}.shizuku"
+            android:exported="true"
+            android:enabled="true"
+            android:multiprocess="false"
+            android:permission="android.permission.INTERACT_ACROSS_USERS_FULL" />
+        <!-- ======================================================== -->
 
         <receiver
             android:name=".app.TermuxOpenReceiver"
@@ -192,7 +205,6 @@
             android:name=".shared.activities.ReportActivity$ReportActivityBroadcastReceiver"
             android:exported="false" />
 
-
         <service
             android:name=".app.TermuxService"
             android:exported="false" />
@@ -206,13 +218,11 @@
             </intent-filter>
         </service>
 
-
         <!-- This (or rather, value 2.1 or higher) is needed to make the Samsung Galaxy S8 mark the
         app with "This app is optimized to run in full screen." -->
         <meta-data
             android:name="android.max_aspect"
             android:value="10.0" />
-
 
         <!-- https://developer.samsung.com/samsung-dex/modify-optimizing.html -->
 
